@@ -260,7 +260,7 @@ public class Practice {
    * board: 
    * {
    *  {' ', ' ', 'X'},
-   *  {'X', ' ', ' '},
+   *  {'X', ' ', '' },
    *  {' ', ' ', ' '}
    * }
    * 
@@ -301,6 +301,34 @@ public class Practice {
    * @return an unsorted list of next moves
    */
   public static List<int[]> nextMoves(char[][] board, int[] current, int[][] directions) {
-    return null;
+
+    
+
+
+
+    return validMoves(board, current, directions, new ArrayList<int[]>());
   }
+
+  private static List<int[]> validMoves(char[][] board, int[] current, int[][] directions, List<int[]> moves){
+
+   for(int[] direction : directions){
+    int currentRow = current[0] + direction[0];
+    int currentCol = current[1] + direction[1];
+
+    if(currentRow >= 0 && currentRow < board.length && currentCol >= 0 && currentCol < board[0].length){
+      if(board[currentRow][currentCol] != 'X'){
+        moves.add(new int[]{currentRow,currentCol});
+      }
+    }
+   }
+
+
+
+
+    
+
+    return moves;
+  }
+
+  
 }
