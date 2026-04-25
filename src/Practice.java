@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -208,7 +209,28 @@ public class Practice {
    * @return true if a person in the extended network works at the specified company, false otherwise
    */
   public static boolean hasExtendedConnectionAtCompany(Professional person, String companyName) {
+    if(person == null) return false;
+
+    Map<Professional, String> map = hasExtenProfessionalsHelper(person, new HashMap<>());
+
+    if(map.containsValue(companyName)) return true;
+
+
+
     return false;
+  }
+
+  private static Map<Professional, String> hasExtenProfessionalsHelper(Professional person, Map<Professional, String> visited){
+    if(person == null) return visited;
+    if(visited.containsKey(person)) return visited;
+
+    visited.put(person, person.getCompany());
+
+    for(Professional neighbor : person.getConnections()){
+      hasExtenProfessionalsHelper(neighbor, visited);
+    }
+
+    return visited;
   }
 
   /**
